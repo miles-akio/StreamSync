@@ -1,4 +1,4 @@
-## **Project Name: StreamSync**  
+# **Project: StreamSync**  
 
 **Description:**  
 StreamSync is a real-time data streaming platform using **React (Next.js) for the frontend**, **Node.js for the backend**, and **Kafka as a message broker**. It extracts, transforms, and loads (ETL) time-series data into a database and streams live updates to the UI using WebSockets.
