@@ -51,29 +51,41 @@ StreamSync processes real-time data through an **ETL pipeline**, using Kafka to 
 
 ## **3. Project File Structure**  
 ```
-StreamSync/
-│── backend/                # Node.js Backend
-│   ├── src/
-│   │   ├── controllers/    # API Controllers
-│   │   ├── kafka/          # Kafka Producers & Consumers
-│   │   ├── models/         # Database Models (PostgreSQL)
-│   │   ├── routes/         # API Routes
-│   │   ├── server.js       # Express Server
-│   │   ├── websocket.js    # WebSocket Server
-│   ├── .env                # Environment Variables
-│   ├── package.json        # Backend Dependencies
-│── frontend/               # Next.js Frontend
-│   ├── pages/              # Next.js Pages
-│   ├── components/         # Reusable UI Components
-│   ├── hooks/              # Custom React Hooks
-│   ├── styles/             # Styling
-│   ├── public/             # Static Assets
-│   ├── package.json        # Frontend Dependencies
-│── database/               # Database Scripts
-│── docker-compose.yml      # Docker Configuration
-│── .gitignore              # Ignore Node Modules, Logs, etc.
-│── LICENSE                 # MIT License
-│── README.md               # Documentation
+StreamSync/                          # Root directory of the project
+│── backend/                         # Node.js Backend
+│   ├── src/                         # Source code for the backend
+│   │   ├── controllers/             # API Controllers (Directory)
+│   │   ├── kafka/                   # Kafka Producers & Consumers (Directory)
+│   │   ├── models/                  # Database Models (PostgreSQL) (Directory)
+│   │   ├── routes/                  # API Routes (Directory)
+│   │   ├── server.js                # Express Server (JavaScript File)
+│   │   ├── websocket.js             # WebSocket Server (JavaScript File)
+│   ├── .env                         # Environment Variables (Environment File)
+│   ├── package.json                 # Backend Dependencies (JSON File)
+│── frontend/                        # Next.js Frontend
+│   ├── pages/                       # Next.js Pages (Directory)
+│   │   ├── index.js                 # Home Page (JavaScript File)
+│   │   ├── dashboard.js             # Example Dashboard Page (JavaScript File)
+│   │   ├── api/                     # API Routes for Next.js (Directory)
+│   ├── components/                  # Reusable UI Components (Directory)
+│   │   ├── Header.js                # Navigation Bar Component (JavaScript File)
+│   │   ├── Footer.js                # Footer Component (JavaScript File)
+│   ├── hooks/                       # Custom React Hooks (Directory)
+│   │   ├── useAuth.js               # Example Custom Hook for Authentication (JavaScript File)
+│   ├── styles/                      # Styling (Directory)
+│   │   ├── global.css               # Global CSS Styles (CSS File)
+│   │   ├── theme.module.css         # Module CSS for Theming (CSS File)
+│   ├── public/                      # Static Assets (Directory)
+│   │   ├── logo.png                 # Logo Image (PNG File)
+│   ├── package.json                 # Frontend Dependencies (JSON File)
+│── database/                        # Database Scripts (Directory)
+│   ├── schema.sql                   # Database Schema (SQL File)
+│   ├── seed.sql                     # Sample Data for Testing (SQL File)
+│── docker-compose.yml               # Docker Configuration (YAML File)
+│── .gitignore                       # Ignore Node Modules, Logs, etc. (Text File)
+│── LICENSE                          # MIT License (Text File)
+│── README.md                        # Documentation (Markdown File)
+
 ```
 
 ---
