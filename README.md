@@ -1,55 +1,63 @@
-# **Project: StreamSync**  
+# **Project: StreamSync**
 
 **Description:**  
 StreamSync is a real-time data streaming platform using **React (Next.js) for the frontend**, **Node.js for the backend**, and **Kafka as a message broker**. It extracts, transforms, and loads (ETL) time-series data into a database and streams live updates to the UI using WebSockets.
 
 ---
 
-## **Table of Contents**  
-1. [Project Overview](#project-overview)  
-2. [Tech Stack](#tech-stack)  
-3. [Project File Structure](#project-file-structure)  
-4. [Setup and Installation](#setup-and-installation)  
-5. [Backend Implementation](#backend-implementation)  
-6. [Frontend Implementation](#frontend-implementation)  
-7. [Kafka Integration](#kafka-integration)  
-8. [WebSocket Streaming](#websocket-streaming)  
-9. [Deployment](#deployment)  
-10. [Future Enhancements](#future-enhancements)  
+## **Table of Contents**
+
+1. [Project Overview](#project-overview)
+2. [Tech Stack](#tech-stack)
+3. [Project File Structure](#project-file-structure)
+4. [Setup and Installation](#setup-and-installation)
+5. [Backend Implementation](#backend-implementation)
+6. [Frontend Implementation](#frontend-implementation)
+7. [Kafka Integration](#kafka-integration)
+8. [WebSocket Streaming](#websocket-streaming)
+9. [Deployment](#deployment)
+10. [Future Enhancements](#future-enhancements)
 
 ---
 
-## **1. Project Overview**  
-StreamSync processes real-time data through an **ETL pipeline**, using Kafka to decouple services. The system ensures that different components (data sources, processing units, UI) interact without dependencies, making it scalable and resilient.  
+## **1. Project Overview**
 
-### **Key Features:**  
-- **Real-time data streaming** to UI via WebSockets  
-- **Kafka-based message brokering** for decoupling services  
-- **ETL pipeline** to process and store structured data  
-- **React + Next.js frontend** with live updates  
-- **Node.js + Express backend** for API handling  
+StreamSync processes real-time data through an **ETL pipeline**, using Kafka to decouple services. The system ensures that different components (data sources, processing units, UI) interact without dependencies, making it scalable and resilient.
+
+### **Key Features:**
+
+- **Real-time data streaming** to UI via WebSockets
+- **Kafka-based message brokering** for decoupling services
+- **ETL pipeline** to process and store structured data
+- **React + Next.js frontend** with live updates
+- **Node.js + Express backend** for API handling
 
 ---
 
-## **2. Tech Stack**  
+## **2. Tech Stack**
+
 ### **Frontend (Client-Side)**
-- **React.js (Next.js)** – Server-side rendering and static site generation  
-- **WebSockets** – Live data subscriptions  
-- **Tailwind CSS** – Styling  
+
+- **React.js (Next.js)** – Server-side rendering and static site generation
+- **WebSockets** – Live data subscriptions
+- **Tailwind CSS** – Styling
 
 ### **Backend (Server-Side)**
-- **Node.js + Express** – REST API & WebSocket server  
-- **Kafka** – Message broker for real-time processing  
-- **PostgreSQL (or AWS DynamoDB)** – Database storage  
+
+- **Node.js + Express** – REST API & WebSocket server
+- **Kafka** – Message broker for real-time processing
+- **PostgreSQL (or AWS DynamoDB)** – Database storage
 
 ### **Infrastructure**
-- **AWS (EC2, S3, Lambda)** – Cloud hosting  
-- **Docker** – Containerized deployment  
-- **Hasura** – Auto-generating GraphQL APIs (optional)  
+
+- **AWS (EC2, S3, Lambda)** – Cloud hosting
+- **Docker** – Containerized deployment
+- **Hasura** – Auto-generating GraphQL APIs (optional)
 
 ---
 
-## **3. Project File Structure**  
+## **3. Project File Structure**
+
 ```
 StreamSync/                          # Root directory of the project
 │── backend/                         # Folder - Node.js Backend
@@ -90,13 +98,16 @@ StreamSync/                          # Root directory of the project
 
 ---
 
-## **4. Setup and Installation**  
+## **4. Setup and Installation**
+
 ### **Prerequisites**
+
 - Install **Node.js (v18+)**
 - Install **Kafka** (via Docker or local setup)
-- Install **PostgreSQL**  
+- Install **PostgreSQL**
 
-### **Backend Setup**  
+### **Backend Setup**
+
 ```bash
 cd backend
 npm install
@@ -104,7 +115,8 @@ cp .env.example .env  # Set up environment variables
 node src/server.js
 ```
 
-### **Frontend Setup**  
+### **Frontend Setup**
+
 ```bash
 cd frontend
 npm install
@@ -112,14 +124,17 @@ npm run dev
 ```
 
 ### **Running Kafka (Using Docker)**
+
 ```bash
 docker-compose up
 ```
 
 ---
 
-## **5. Backend Implementation**  
+## **5. Backend Implementation**
+
 ### **server.js (Express Backend)**
+
 ```javascript
 const express = require("express");
 const cors = require("cors");
@@ -144,6 +159,7 @@ app.listen(PORT, () => {
 ```
 
 ### **WebSocket Streaming**
+
 ```javascript
 const WebSocket = require("ws");
 
@@ -157,8 +173,10 @@ wss.on("connection", (ws) => {
 
 ---
 
-## **6. Frontend Implementation**  
+## **6. Frontend Implementation**
+
 ### **Using WebSockets in React**
+
 ```javascript
 import { useEffect, useState } from "react";
 
@@ -176,14 +194,20 @@ export default function LiveData() {
     return () => ws.close();
   }, []);
 
-  return <div>Live Data: {data ? JSON.stringify(data) : "Waiting for updates..."}</div>;
+  return (
+    <div>
+      Live Data: {data ? JSON.stringify(data) : "Waiting for updates..."}
+    </div>
+  );
 }
 ```
 
 ---
 
-## **7. Kafka Integration**  
+## **7. Kafka Integration**
+
 ### **Producer (Sending Messages)**
+
 ```javascript
 const { Kafka } = require("kafkajs");
 
@@ -207,6 +231,7 @@ module.exports = { sendMessage };
 ```
 
 ### **Consumer (Receiving Messages)**
+
 ```javascript
 const consumer = kafka.consumer({ groupId: "streamsync-group" });
 
@@ -226,30 +251,29 @@ startConsumer();
 
 ---
 
-## **8. Deployment**  
+## **8. Deployment**
+
 ### **Docker (Containerized Deployment)**
-- Add a **Dockerfile** for each service  
-- Use **docker-compose.yml** to manage services  
+
+- Add a **Dockerfile** for each service
+- Use **docker-compose.yml** to manage services
 
 ### **AWS Deployment**
-- **EC2 Instance** → Host backend & Kafka  
-- **S3 + CloudFront** → Host frontend  
-- **Lambda (Optional)** → Serverless event handling  
+
+- **EC2 Instance** → Host backend & Kafka
+- **S3 + CloudFront** → Host frontend
+- **Lambda (Optional)** → Serverless event handling
 
 ---
 
-## **9. Future Enhancements**  
-- Implement **GraphQL with Hasura** for better data querying  
-- Add **Redis** for caching frequently requested data  
-- Enhance **security** with JWT authentication  
+## **9. Future Enhancements**
+
+- Implement **GraphQL with Hasura** for better data querying
+- Add **Redis** for caching frequently requested data
+- Enhance **security** with JWT authentication
 
 ---
 
-## **10. Conclusion**  
-StreamSync is a scalable real-time data streaming app using Kafka, WebSockets, and an ETL pipeline. It ensures fast, reliable data processing and decoupled services.  
+## **10. Conclusion**
 
-Would love feedback! 🚀  
-
----
-
-This `README.md` explains everything from **setup to architecture and deployment**. Let me know if you need further refinements! 🔥
+StreamSync is a scalable real-time data streaming app using Kafka, WebSockets, and an ETL pipeline. It ensures fast, reliable data processing and decoupled services.
