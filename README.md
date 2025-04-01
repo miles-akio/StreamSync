@@ -52,39 +52,39 @@ StreamSync processes real-time data through an **ETL pipeline**, using Kafka to 
 ## **3. Project File Structure**  
 ```
 StreamSync/                          # Root directory of the project
-│── backend/                         # Node.js Backend
-│   ├── src/                         # Source code for the backend
-│   │   ├── controllers/             # API Controllers (Directory)
-│   │   ├── kafka/                   # Kafka Producers & Consumers (Directory)
-│   │   ├── models/                  # Database Models (PostgreSQL) (Directory)
-│   │   ├── routes/                  # API Routes (Directory)
-│   │   ├── server.js                # Express Server (JavaScript File)
-│   │   ├── websocket.js             # WebSocket Server (JavaScript File)
-│   ├── .env                         # Environment Variables (Environment File)
-│   ├── package.json                 # Backend Dependencies (JSON File)
-│── frontend/                        # Next.js Frontend
-│   ├── pages/                       # Next.js Pages (Directory)
-│   │   ├── index.js                 # Home Page (JavaScript File)
-│   │   ├── dashboard.js             # Example Dashboard Page (JavaScript File)
-│   │   ├── api/                     # API Routes for Next.js (Directory)
-│   ├── components/                  # Reusable UI Components (Directory)
-│   │   ├── Header.js                # Navigation Bar Component (JavaScript File)
-│   │   ├── Footer.js                # Footer Component (JavaScript File)
-│   ├── hooks/                       # Custom React Hooks (Directory)
-│   │   ├── useAuth.js               # Example Custom Hook for Authentication (JavaScript File)
-│   ├── styles/                      # Styling (Directory)
-│   │   ├── global.css               # Global CSS Styles (CSS File)
-│   │   ├── theme.module.css         # Module CSS for Theming (CSS File)
-│   ├── public/                      # Static Assets (Directory)
-│   │   ├── logo.png                 # Logo Image (PNG File)
-│   ├── package.json                 # Frontend Dependencies (JSON File)
-│── database/                        # Database Scripts (Directory)
-│   ├── schema.sql                   # Database Schema (SQL File)
-│   ├── seed.sql                     # Sample Data for Testing (SQL File)
-│── docker-compose.yml               # Docker Configuration (YAML File)
-│── .gitignore                       # Ignore Node Modules, Logs, etc. (Text File)
-│── LICENSE                          # MIT License (Text File)
-│── README.md                        # Documentation (Markdown File)
+│── backend/                         # Folder - Node.js Backend
+│   ├── src/                         # Folder - Source code for the backend
+│   │   ├── controllers/             # Folder - API Controllers
+│   │   ├── kafka/                   # Folder - Kafka Producers & Consumers
+│   │   ├── models/                  # Folder - Database Models (PostgreSQL)
+│   │   ├── routes/                  # Folder - API Routes
+│   │   ├── server.js                # File - Express Server (JavaScript)
+│   │   ├── websocket.js             # File - WebSocket Server (JavaScript)
+│   ├── .env                         # File - Environment Variables
+│   ├── package.json                 # File - Backend Dependencies (JSON)
+│── frontend/                        # Folder - Next.js Frontend
+│   ├── pages/                       # Folder - Next.js Pages
+│   │   ├── index.js                 # File - Home Page (JavaScript)
+│   │   ├── dashboard.js             # File - Example Dashboard Page (JavaScript)
+│   │   ├── api/                     # Folder - API Routes for Next.js
+│   ├── components/                  # Folder - Reusable UI Components
+│   │   ├── Header.js                # File - Navigation Bar Component (JavaScript)
+│   │   ├── Footer.js                # File - Footer Component (JavaScript)
+│   ├── hooks/                       # Folder - Custom React Hooks
+│   │   ├── useAuth.js               # File - Example Custom Hook for Authentication (JavaScript)
+│   ├── styles/                      # Folder - Styling
+│   │   ├── global.css               # File - Global CSS Styles
+│   │   ├── theme.module.css         # File - Module CSS for Theming
+│   ├── public/                      # Folder - Static Assets
+│   │   ├── logo.png                 # File - Logo Image (PNG)
+│   ├── package.json                 # File - Frontend Dependencies (JSON)
+│── database/                        # Folder - Database Scripts
+│   ├── schema.sql                   # File - Database Schema (SQL)
+│   ├── seed.sql                     # File - Sample Data for Testing (SQL)
+│── docker-compose.yml               # File - Docker Configuration (YAML)
+│── .gitignore                       # File - Ignore Node Modules, Logs, etc. (Text)
+│── LICENSE                          # File - MIT License (Text)
+│── README.md                        # File - Documentation (Markdown)
 
 ```
 
