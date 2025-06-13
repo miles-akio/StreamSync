@@ -62,38 +62,39 @@ StreamSync processes real-time data through an **ETL pipeline**, using Kafka to 
 StreamSync/                          # Root directory of the project
 │── backend/                         # Folder - Node.js Backend
 │   ├── src/                         # Folder - Source code for the backend
-│   │   ├── controllers/             # Folder - API Controllers
+│   │   ├── controllers/             # Folder - API Controllers (to be implemented)
 │   │   ├── kafka/                   # Folder - Kafka Producers & Consumers
-│   │   ├── models/                  # Folder - Database Models (PostgreSQL)
-│   │   ├── routes/                  # Folder - API Routes
-│   │   ├── server.js                # File - Express Server (JavaScript)
-│   │   ├── websocket.js             # File - WebSocket Server (JavaScript)
-│   ├── .env                         # File - Environment Variables
-│   ├── package.json                 # File - Backend Dependencies (JSON)
+│   │   │   └── kafkaConfig.js       # Kafka client, producer, consumer setup with retry and topic creation
+│   │   ├── models/                  # Folder - Database Models (PostgreSQL) (to be implemented)
+│   │   ├── routes/                  # Folder - API Routes (to be implemented)
+│   │   │   └── index.js             # Basic API routes (to be implemented)
+│   │   ├── server.js                # Express Server with Kafka setup
+│   │   ├── websocket.js             # WebSocket Server broadcasting Kafka messages
+│   ├── .env                         # Environment Variables (to be configured)
+│   ├── package.json                 # Backend Dependencies (JSON)
 │── frontend/                        # Folder - Next.js Frontend
 │   ├── pages/                       # Folder - Next.js Pages
-│   │   ├── index.js                 # File - Home Page (JavaScript)
-│   │   ├── dashboard.js             # File - Example Dashboard Page (JavaScript)
-│   │   ├── api/                     # Folder - API Routes for Next.js
-│   ├── components/                  # Folder - Reusable UI Components
-│   │   ├── Header.js                # File - Navigation Bar Component (JavaScript)
-│   │   ├── Footer.js                # File - Footer Component (JavaScript)
-│   ├── hooks/                       # Folder - Custom React Hooks
-│   │   ├── useAuth.js               # File - Example Custom Hook for Authentication (JavaScript)
-│   ├── styles/                      # Folder - Styling
-│   │   ├── global.css               # File - Global CSS Styles
-│   │   ├── theme.module.css         # File - Module CSS for Theming
-│   ├── public/                      # Folder - Static Assets
-│   │   ├── logo.png                 # File - Logo Image (PNG)
-│   ├── package.json                 # File - Frontend Dependencies (JSON)
-│── database/                        # Folder - Database Scripts
-│   ├── schema.sql                   # File - Database Schema (SQL)
-│   ├── seed.sql                     # File - Sample Data for Testing (SQL)
-│── docker-compose.yml               # File - Docker Configuration (YAML)
-│── .gitignore                       # File - Ignore Node Modules, Logs, etc. (Text)
-│── LICENSE                          # File - MIT License (Text)
-│── README.md                        # File - Documentation (Markdown)
-
+│   │   ├── index.js                 # Home Page (to be enhanced)
+│   │   ├── dashboard.js             # Dashboard Page (to be implemented)
+│   │   ├── api/                     # API Routes for Next.js (to be implemented)
+│   ├── components/                  # Reusable UI Components
+│   │   ├── Header.js                # Navigation Bar Component
+│   │   ├── Footer.js                # Footer Component
+│   ├── hooks/                       # Custom React Hooks
+│   │   ├── useAuth.js               # Authentication Hook (example)
+│   ├── styles/                      # Styling
+│   │   ├── global.css               # Global CSS Styles
+│   │   ├── theme.module.css         # Module CSS for Theming
+│   ├── public/                      # Static Assets
+│   │   ├── logo.png                 # Logo Image (PNG)
+│   ├── package.json                 # Frontend Dependencies (JSON)
+│── database/                        # Database Scripts
+│   ├── schema.sql                   # Database Schema (SQL) (to be implemented)
+│   ├── seed.sql                     # Sample Data for Testing (SQL) (to be implemented)
+│── docker-compose.yml               # Docker Configuration (YAML)
+│── .gitignore                       # Ignore Node Modules, Logs, etc. (Text)
+│── LICENSE                          # MIT License (Text)
+│── README.md                        # Documentation (Markdown)
 ```
 
 ---
@@ -131,149 +132,61 @@ docker-compose up
 
 ---
 
-## **5. Backend Implementation**
+## **5. Backend Implementation (Completed So Far)**
 
-### **server.js (Express Backend)**
-
-```javascript
-const express = require("express");
-const cors = require("cors");
-const { setupKafka } = require("./kafka/kafkaConfig");
-
-const app = express();
-app.use(cors());
-app.use(express.json());
-
-const PORT = process.env.PORT || 5000;
-
-// Kafka setup
-setupKafka();
-
-app.get("/", (req, res) => {
-  res.send("Backend is running...");
-});
-
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
-```
-
-### **WebSocket Streaming**
-
-```javascript
-const WebSocket = require("ws");
-
-const wss = new WebSocket.Server({ port: 8080 });
-
-wss.on("connection", (ws) => {
-  console.log("New WebSocket connection");
-  ws.send(JSON.stringify({ message: "Connected to WebSocket" }));
-});
-```
+- Created **Kafka client, producer, and consumer** with retry logic and topic creation in `backend/src/kafka/kafkaConfig.js`
+- Setup **Express server** in `backend/src/server.js` with CORS, JSON parsing, and Kafka setup
+- Created **WebSocket server** in `backend/src/websocket.js` that listens on port 8080 and sends connection confirmation
+- Kafka consumer logs received messages; integration to broadcast to WebSocket clients is next step
 
 ---
 
-## **6. Frontend Implementation**
+## **6. Frontend Implementation (To Be Done)**
 
-### **Using WebSockets in React**
-
-```javascript
-import { useEffect, useState } from "react";
-
-export default function LiveData() {
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    const ws = new WebSocket("ws://localhost:8080");
-
-    ws.onmessage = (event) => {
-      const newData = JSON.parse(event.data);
-      setData(newData);
-    };
-
-    return () => ws.close();
-  }, []);
-
-  return (
-    <div>
-      Live Data: {data ? JSON.stringify(data) : "Waiting for updates..."}
-    </div>
-  );
-}
-```
+- Implement WebSocket client to connect to backend WebSocket server and receive live data
+- Create UI components and pages to display live streaming data
+- Use React hooks and Next.js pages for dynamic updates
 
 ---
 
 ## **7. Kafka Integration**
 
-### **Producer (Sending Messages)**
-
-```javascript
-const { Kafka } = require("kafkajs");
-
-const kafka = new Kafka({
-  clientId: "streamsync",
-  brokers: ["localhost:9092"],
-});
-
-const producer = kafka.producer();
-
-async function sendMessage(data) {
-  await producer.connect();
-  await producer.send({
-    topic: "stream_topic",
-    messages: [{ value: JSON.stringify(data) }],
-  });
-  await producer.disconnect();
-}
-
-module.exports = { sendMessage };
-```
-
-### **Consumer (Receiving Messages)**
-
-```javascript
-const consumer = kafka.consumer({ groupId: "streamsync-group" });
-
-async function startConsumer() {
-  await consumer.connect();
-  await consumer.subscribe({ topic: "stream_topic", fromBeginning: true });
-
-  await consumer.run({
-    eachMessage: async ({ message }) => {
-      console.log("Received:", message.value.toString());
-    },
-  });
-}
-
-startConsumer();
-```
+- Kafka setup with `kafkajs` in backend
+- Producer and consumer with topic `"stream_topic"`
+- Retry mechanism to ensure Kafka readiness before connecting
 
 ---
 
-## **8. Deployment**
+## **8. WebSocket Streaming**
 
-### **Docker (Containerized Deployment)**
-
-- Add a **Dockerfile** for each service
-- Use **docker-compose.yml** to manage services
-
-### **AWS Deployment**
-
-- **EC2 Instance** → Host backend & Kafka
-- **S3 + CloudFront** → Host frontend
-- **Lambda (Optional)** → Serverless event handling
+- WebSocket server running on port 8080
+- Sends initial connection message to clients
+- Next: Broadcast Kafka messages to connected WebSocket clients
 
 ---
 
-## **9. Future Enhancements**
+## **9. Deployment**
 
-- Implement **GraphQL with Hasura** for better data querying
-- Add **Redis** for caching frequently requested data
-- Enhance **security** with JWT authentication
+- Dockerfiles for backend and frontend (to be finalized)
+- `docker-compose.yml` to orchestrate backend, frontend, Kafka, and database services
 
 ---
 
-## **10. Conclusion**
+## **10. Future Enhancements**
 
-StreamSync is a scalable real-time data streaming app using Kafka, WebSockets, and an ETL pipeline. It ensures fast, reliable data processing and decoupled services.
+- Implement API controllers, routes, and database models
+- Add frontend dashboard and UI improvements
+- Integrate database schema and seed data
+- Add authentication and security features
+- Implement GraphQL with Hasura and caching with Redis
+
+---
+
+# Summary of Progress
+
+- Kafka connection and topic creation logic implemented with retries
+- Backend Express server and WebSocket server created and running
+- Kafka consumer logs messages; WebSocket integration pending
+- Frontend setup pending implementation of WebSocket client and UI
+
+---
