@@ -1,0 +1,14 @@
+-- PostgreSQL schema for StreamSync time-series data
+
+CREATE TABLE IF NOT EXISTS streams (
+  id SERIAL PRIMARY KEY,
+  stream_name VARCHAR(255) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE IF NOT EXISTS stream_data (
+  id SERIAL PRIMARY KEY,
+  stream_id INTEGER REFERENCES streams(id) ON DELETE CASCADE,
+  data JSONB NOT NULL,
+  timestamp TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
+);
