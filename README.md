@@ -190,3 +190,5 @@ docker-compose up
 - Frontend setup pending implementation of WebSocket client and UI
 
 ---
+
+Please confirm if you want me to proceed with implementing the WebSocket broadcasting of Kafka messages to clients and frontend WebSocket client next, or if you want to prioritize other parts.
